@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: auth-app-backend
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/auth-app?allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+#       ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      timeout: 2s
+      connect-timeout: 2s
+
+server:
+  port: 8002
+
+security:
+  jwt:
+    secret: K7mQ2vL9xR4pT8nW6zY3cF5hJ1sD0aB8uE6gN4kP9wX2rV7tM3qZ5yH8cL1fS606yhgt6
+    issuer: api.substring.com
+    access-ttl-seconds: 300
+    refresh-ttl-seconds: 3600
+    refresh-token-cookie-name: refreshToken
+    refresh-token-cookie-domain: localhost
+    refresh-token-cookie-path: /
+    cookie-secure: true
+    cookie-http-only: true
+    cookie-same-site: Lax
+
+logging:
+  level:
+    root: INFO
+    com.gen.auth: DEBUG
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
+
+  file:
+    path: logs
+
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [${spring.application.name}] [%thread] %-5level %logger{36} - %msg%n"
+
+    file: "%d{yyyy-MM-dd HH:mm:ss} [${spring.application.name}] [%thread] %-5level %logger{36} - %msg%n"

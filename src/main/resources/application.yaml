@@ -1,0 +1,66 @@
+spring:
+  application:
+    name: auth-app-backend
+  datasource:
+    url: jdbc:mysql://localhost:3306/your_database_name
+    username: your_username
+    password: your_password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+#       ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  profiles:
+    active:
+      - dev
+server:
+  port: 8000
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      timeout: 2s
+      connect-timeout: 2s
+      client-type: jedis
+      jedis:
+        pool:
+          max-active: 20
+          max-idle: 10
+          min-idle: 2
+          max-wait: 2s
+
+
+
+logging:
+  level:
+    root: INFO
+    com.gen.auth: DEBUG
+    org.hibernate.SQL: DEBUG
+
+  file:
+    path: logs
+
+  pattern:
+    console: >
+      %d{yyyy-MM-dd HH:mm:ss}
+      [${spring.application.name}]
+      [%thread]
+      %-5level
+      %logger{36}
+      - %msg%n
+
+    file: >
+      %d{yyyy-MM-dd HH:mm:ss}
+      [${spring.application.name}]
+      [%thread]
+      %-5level
+      %logger{36}
+      - %msg%n  
+
+
+
